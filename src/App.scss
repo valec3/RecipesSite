@@ -1,0 +1,92 @@
+// @import '../src/media.scss';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Rokkitt:wght@400;700&display=swap');
+
+*,*::before,*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f2f2f2;
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.5;
+
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Rokkitt', serif;
+}
+
+::-webkit-scrollbar {
+    width: 0.4rem;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+// #HEADER
+.header{
+    background-image: url(https://images.unsplash.com/photo-1543339308-43e59d6b73a6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 4rem;
+
+    .layer{
+        background-color: rgba($color: #000000, $alpha: 0.5);
+    
+        .logo-wrapper{
+            padding-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        
+            .logo{
+                cursor: pointer;
+                border: 5px solid #fff;
+                padding: .9rem;
+                border-radius: 100%;
+                width: 4rem;
+                height: 4rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .brand{
+                    font-size: 2rem;
+                    color: #fff;
+                }
+            }
+        
+        }
+        .header-text{
+            padding: 7rem;
+            padding-bottom: 8rem;
+            text-align: center;
+            h1{
+                color: #fff;
+                margin-bottom: 1rem;
+                font-size: 3rem;
+            }
+            p{
+                font-size: 1.5rem;
+                color: #fff;
+            }
+        }
+    }
+}
+
+.recipeHeading{
+    font-size: 3rem;
+    color: #6fc9bf;
+    margin-bottom: 4.5rem;
+    text-align: center;
+}
