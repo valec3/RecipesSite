@@ -1,6 +1,9 @@
 // @import '../src/media.scss';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Rokkitt:wght@400;700&display=swap');
 
+// Vars
+$color: #6fc9bf;
+
 *,*::before,*::after {
     box-sizing: border-box;
     margin: 0;
@@ -17,7 +20,10 @@ body {
 h1,h2,h3,h4,h5,h6 {
     font-family: 'Rokkitt', serif;
 }
-
+img{
+    max-width: 100%;
+    height: auto;
+}
 ::-webkit-scrollbar {
     width: 0.4rem;
 }
@@ -86,7 +92,125 @@ h1,h2,h3,h4,h5,h6 {
 
 .recipeHeading{
     font-size: 3rem;
-    color: #6fc9bf;
+    color: $color;
     margin-bottom: 4.5rem;
     text-align: center;
+}
+
+.tabs{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+
+    .tablist{
+        position: relative;
+        width: 8.9rem;
+        cursor: pointer;
+        gap: .5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        svg{
+            font-size: 3rem;
+        }
+        span{
+            font-size: 1.2rem;
+        }
+        &.active{
+            background-color: $color;
+            svg,span{
+                color: #fff;
+            }
+            &::after{
+                position: absolute;
+                content: "";
+                border-top: 20px solid $color;
+                border-left: 15px solid transparent;
+                border-right: 15px solid transparent;
+                bottom: -20px;
+            }
+        }
+        &:hover{
+            background-color: $color;
+        }
+    }
+}
+
+.recipe_banner{
+    background-color: #29336b;
+    padding: 60px 40px;
+    color: #fff;
+    display: flex;
+    margin-bottom:5rem ;
+    display:flex ;
+    .left-col{
+        flex: 1;
+        .badge{
+            font-size: 1rem;
+            background-color: $color;
+            padding: .5rem;
+            border-radius: 4px;
+            margin-bottom: .6rem;
+            display: inline-block;
+        }
+        h1{
+            font-size: 3rem;
+            margin-bottom: .7rem;
+        }
+        p{
+            font-size: 1.1rem;
+            margin-bottom: .8rem;
+            strong{
+                margin-right: 5px;
+            }
+        }
+        h3{
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+        }
+        .ingredients{
+            display: flex;
+            gap: 1rem;
+            ul{
+                padding: 0;
+                display: flex;
+                gap: 1rem;
+                flex-flow: wrap;
+                justify-content: flex-start;
+                align-items: center;
+                li{
+                    font-size: 1.05rem;
+                    list-style: none;
+                    display: flex;
+                    align-items: center;
+                    gap: .3rem;
+                    svg{
+                        font-size: 1.1rem;
+                    }
+                    span{
+                        width: calc(100% - 20px);
+                    }
+                }
+            }
+        }
+    }
+    .right-col{
+        flex: 1;
+        padding-top: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .image-wrapper{
+            width: 350px;
+            height: 350px;
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-fit: cover;
+                border-radius: 100%;
+            }
+        }
+    }
 }
