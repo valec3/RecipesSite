@@ -1,12 +1,32 @@
+import { useState,useEffect } from 'react';
 import {BsSearch} from 'react-icons/bs'
+import { fetchData } from '../services/service';
 
 const RecipesList = () => {
+    const [isFocused, setIsFocused] = useState(false);
+    const [recipes, setRecipes] = useState([]);
+    const [searchedTerm, setSearchedTerm] = useState('');
+    const [query, setQuery] = useState('chicken');
+
+    // function to handle the search input
+    const handleFocus = () => setIsFocused(true);
+    const handleBlur = () => setIsFocused(false);
+
+    useEffect(() => {
+        fetchData(query)
+            .then((response) => {
+                setRecipes(response.data);
+                console.log(response);
+            })
+    },[searchedTerm,query]);
+
     return (
         <div className='container'>
         <div className='heading-line'>
             <strong>Search Recipes</strong>
-            <div className='input-wrapper' >
-                <input type="text" placeholder='Search' />
+            <div className={`input-wrapper ${isFocused ? 'active' :''}`} >
+                <input type="text" placeholder='Search' onFocus={handleFocus}
+        onBlur={handleBlur}/>
                 <button ><BsSearch /></button>
             </div> 
         </div>
