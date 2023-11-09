@@ -6,55 +6,52 @@ const RecipesList = () => {
     const [isFocused, setIsFocused] = useState(false);
     const [recipes, setRecipes] = useState([]);
     const [searchedTerm, setSearchedTerm] = useState('');
-    const [query, setQuery] = useState('chicken');
+    const [query, setQuery] = useState('');
 
     // function to handle the search input
     const handleFocus = () => setIsFocused(true);
     const handleBlur = () => setIsFocused(false);
 
     useEffect(() => {
-        fetchData(query)
-            .then((response) => {
-                setRecipes(response.data);
-                console.log(response);
-            })
-    },[searchedTerm,query]);
+        const getRecipes = async () => {
+            const data = await fetchData(query);
+            console.log(data);
+            setRecipes(data);
+        }
+        getRecipes();
+    },[query]);
 
+    const handleSearch = (e) => {
+        setSearchedTerm(e.target.value);
+    }
+    const handleSubmitSearch = () => {
+        setQuery(searchedTerm);
+    }
     return (
         <div className='container'>
         <div className='heading-line'>
             <strong>Search Recipes</strong>
             <div className={`input-wrapper ${isFocused ? 'active' :''}`} >
                 <input type="text" placeholder='Search' onFocus={handleFocus}
-        onBlur={handleBlur}/>
-                <button ><BsSearch /></button>
+        onBlur={handleBlur} onChange={handleSearch}/>
+                <button onClick={handleSubmitSearch}><BsSearch /></button>
             </div> 
         </div>
         <div className='flexbox'>
-            <div className='flexItem'>
-                <div className='img-wrapper'>
-                    <img src="https://images.unsplash.com/photo-1607532941433-304659e8198a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1378&q=80" alt='item.recipe.label' />
-                </div>
-                <p>Pizza Recipe</p>
-            </div>
-            <div className='flexItem'>
-                <div className='img-wrapper'>
-                    <img src="https://images.unsplash.com/photo-1607532941433-304659e8198a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1378&q=80" alt='item.recipe.label' />
-                </div>
-                <p>Pizza Recipe</p>
-            </div>
-            <div className='flexItem'>
-                <div className='img-wrapper'>
-                    <img src="https://images.unsplash.com/photo-1607532941433-304659e8198a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1378&q=80" alt='item.recipe.label' />
-                </div>
-                <p>Pizza Recipe</p>
-            </div>
-            <div className='flexItem'>
-                <div className='img-wrapper'>
-                    <img src="https://images.unsplash.com/photo-1607532941433-304659e8198a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1378&q=80" alt='item.recipe.label' />
-                </div>
-                <p>Pizza Recipe</p>
-            </div>
+            {
+                recipes.length > 0 ?
+                recipes.map((item,i) => {
+                    return (
+                        <div className='flexItem' key={i+item?.recipe.label}>
+                            <div className='img-wrapper'>
+                                <img src={item?.recipe.image} alt={item?.recipe.label} />
+                            </div>
+                            <p>{item.recipe.label}</p>
+                        </div>
+                    )
+                })
+                : <p>No recipes found</p>
+            }
         </div>
     </div>
     )
